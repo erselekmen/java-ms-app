@@ -3,19 +3,18 @@ kind: Ingress
 metadata:
   name: "java-microservice-ingress"
   annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/load-balancer-name: apg2
     alb.ingress.kubernetes.io/target-type: ip
   labels:
     app: java-microservice
 spec:
+  ingressClassName: alb  
   rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: "service-java-microservice"
-                port:
-                  number: 80
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: "service-java-microservice"
+            port:
+              number: 80
